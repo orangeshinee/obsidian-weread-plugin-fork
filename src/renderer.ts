@@ -4,11 +4,11 @@ import { settingsStore } from './settings';
 import { get } from 'svelte/store';
 export class Renderer {
 	constructor() {
-		nunjucks.configure({ autoescape: false })
+		nunjucks
+			.configure({ autoescape: false })
 			// 自定义函数 https://mozilla.github.io/nunjucks/api.html#addfilter
 			.addFilter('replace', function (str, pattern, replacement) {
-				if (!str)
-					return ''
+				if (!str) return '';
 
 				if (typeof pattern === 'string') {
 					try {
@@ -28,8 +28,7 @@ export class Renderer {
 					return str.replace(pattern, replacement);
 				}
 				return str.replaceAll(pattern, replacement);
-			})
-			;
+			});
 	}
 
 	validate(template: string): boolean {

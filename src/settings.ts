@@ -46,8 +46,7 @@ const DEFAULT_SETTINGS: WereadPluginSettings = {
 	showEmptyChapterTitleToggle: false,
 	convertTags: false,
 	saveArticleToggle: true,
-	saveReadingInfoToggle: true,
-
+	saveReadingInfoToggle: true
 };
 
 const createSettingsStore = () => {
@@ -247,7 +246,7 @@ const createSettingsStore = () => {
 			setEmptyChapterTitleToggle,
 			setConvertTags,
 			setSaveArticleToggle,
-			setSaveReadingInfoToggle,
+			setSaveReadingInfoToggle
 		}
 	};
 };

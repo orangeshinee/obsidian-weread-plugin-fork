@@ -134,10 +134,12 @@ export class WereadSettingsTab extends PluginSettingTab {
 			.setName('保存阅读元数据?')
 			.setDesc('开启此选项会阅读数据写入frontmatter')
 			.addToggle((toggle) => {
-				return toggle.setValue(get(settingsStore).saveReadingInfoToggle).onChange((value) => {
-					settingsStore.actions.setSaveReadingInfoToggle(value);
-					this.display();
-				});
+				return toggle
+					.setValue(get(settingsStore).saveReadingInfoToggle)
+					.onChange((value) => {
+						settingsStore.actions.setSaveReadingInfoToggle(value);
+						this.display();
+					});
 			});
 	}
 	private convertTagToggle(): void {
