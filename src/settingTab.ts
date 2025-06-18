@@ -6,7 +6,7 @@ import { get } from 'svelte/store';
 import WereadLoginModel from './components/wereadLoginModel';
 import WereadLogoutModel from './components/wereadLogoutModel';
 
-import pickBy from 'lodash.pickby';
+const pickBy = require('lodash.pickby');
 import { Renderer } from './renderer';
 import { getEncodeCookieString } from './utils/cookiesUtil';
 import { Notice } from 'obsidian';
@@ -56,6 +56,7 @@ export class WereadSettingsTab extends PluginSettingTab {
 			this.dailyNoteFormat();
 			this.insertAfter();
 		}
+		this.customTagSetting();
 		this.template();
 		if (Platform.isDesktopApp) {
 			this.showDebugHelp();
@@ -372,6 +373,22 @@ export class WereadSettingsTab extends PluginSettingTab {
 						console.debug('set empty chapter title toggle to', value);
 						settingsStore.actions.setEmptyChapterTitleToggle(value);
 						this.display();
+					});
+			});
+	}
+
+	private customTagSetting(): void {
+		new Setting(this.containerEl)
+			.setName('自定义标签')
+			.setDesc(
+				'为所有导出的笔记添加一个自定义标签，可用于分类或自动化处理，可以使用模板中的变量，例如{{metaData.title}}等，需要在前面加上metaData'
+			)
+			.addText((input) => {
+				input
+					.setPlaceholder('如：#微信读书/{{metaData.title}}')
+					.setValue(get(settingsStore).customTag || '')
+					.onChange((value: string) => {
+						settingsStore.actions.setCustomTag(value);
 					});
 			});
 	}

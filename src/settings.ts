@@ -24,6 +24,7 @@ interface WereadPluginSettings {
 	convertTags: boolean;
 	saveArticleToggle: boolean;
 	saveReadingInfoToggle: boolean;
+	customTag: string;
 }
 
 const DEFAULT_SETTINGS: WereadPluginSettings = {
@@ -46,7 +47,8 @@ const DEFAULT_SETTINGS: WereadPluginSettings = {
 	showEmptyChapterTitleToggle: false,
 	convertTags: false,
 	saveArticleToggle: true,
-	saveReadingInfoToggle: true
+	saveReadingInfoToggle: true,
+	customTag: ''
 };
 
 const createSettingsStore = () => {
@@ -226,6 +228,14 @@ const createSettingsStore = () => {
 			return state;
 		});
 	};
+
+	const setCustomTag = (customTag: string) => {
+		store.update((state) => {
+			state.customTag = customTag;
+			return state;
+		});
+	};
+
 	return {
 		subscribe: store.subscribe,
 		initialise,
@@ -246,7 +256,8 @@ const createSettingsStore = () => {
 			setEmptyChapterTitleToggle,
 			setConvertTags,
 			setSaveArticleToggle,
-			setSaveReadingInfoToggle
+			setSaveReadingInfoToggle,
+			setCustomTag
 		}
 	};
 };
